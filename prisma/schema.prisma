@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  password  String?
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt()
+
+  collects     Collect[]
+  categorys    Category[]
+  subcategorys Subcategory[]
+  payments     Payment[]
+}
+
+model Payment {
+  id            String    @id @default(uuid())
+  description   String
+  status        Boolean   @default(true)
+  categoryId    String?
+  subcategoryId String?
+  date          DateTime
+  value         Decimal   @db.Decimal(10, 2)
+  userId        String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime? @updatedAt()
+
+  category    Category?    @relation(fields: [categoryId], references: [id])
+  subcategory Subcategory? @relation(fields: [subcategoryId], references: [id])
+  user        User?        @relation(fields: [userId], references: [id])
+}
+
+model Collect {
+  id          String    @id @default(uuid())
+  description String
+  status      Boolean   @default(false)
+  date        DateTime
+  value       Decimal   @db.Decimal(10, 2)
+  userId      String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt()
+
+  user User? @relation(fields: [userId], references: [id])
+}
+
+model Category {
+  id          String    @id @default(uuid())
+  description String
+  userId      String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt()
+
+  payments Payment[]
+  user     User?     @relation(fields: [userId], references: [id])
+}
+
+model Subcategory {
+  id          String    @id @default(uuid())
+  description String
+  userId      String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt()
+
+  payments Payment[]
+  user     User?     @relation(fields: [userId], references: [id])
+}

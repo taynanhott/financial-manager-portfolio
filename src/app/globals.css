@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+
+    --primary: 220.9 39.3% 11%;
+    --primary-foreground: 210 20% 98%;
+
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 71.4% 4.1%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 210 20% 98%;
+    --primary-foreground: 220.9 39.3% 11%;
+
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 216 12.2% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+input {
+  @apply px-2;
+}
+
+.fc-header-toolbar {
+  display: inline-block;
+  padding: 4px 4px;
+
+  @apply space-x-8;
+}
+
+.fc-day {
+  @apply m-8;
+}
+
+.fc-scrollgrid-sync-table {
+  @apply w-full;
+}
+
+.fc-view {
+  @apply w-full h-full lg:h-3/4 xl:h-2/3 bg-white;
+}
+
+.fc-h-event {
+  @apply bg-violet-500 border border-violet-600;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  @apply bg-violet-100;
+}
+
+.fc .fc-button {
+  @apply bg-violet-800 hover:bg-violet-900;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+  @apply bg-violet-600;
+}
+
+.fc .fc-button-primary:disabled {
+  @apply bg-violet-600;
+}
+
+.fc-v-event {
+  @apply bg-violet-500 border border-violet-600;
+}
+
+@font-face {
+  font-family: "poppins";
+  src: url("../fonts/Poppins/Poppins-Light.ttf") format("opentype");
+  font-style: "normal";
+  font-display: "swap";
+}
+
+@font-face {
+  font-family: "poppins-bold";
+  src: url("../fonts/Poppins/Poppins-SemiBold.ttf") format("opentype");
+  font-style: "normal";
+  font-display: "swap";
+}
+
+/* styles.css */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  /* Esconde a barra de rolagem no Chrome, Safari e Opera */
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* Esconde a barra de rolagem no IE e Edge */
+  scrollbar-width: none;
+  /* Esconde a barra de rolagem no Firefox */
+}
+
+.loader {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transform: translateZ(1px);
+}
+
+.loader:after {
+  left: 0;
+  right: 0;
+  margin: auto;
+  content: "$";
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-size: 32px;
+  font-weight: bold;
+  background: #cbd5e1;
+  color: #0f172a;
+  border: 4px double;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
+  animation: coin-flip 4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+select {
+  background-color: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  width: 100%;
+  padding: 1%;
+  font-size: 14px;
+}
+
+select:disabled {
+  opacity: 0.5;
+  cursor: no-drop;
+}
+
+@keyframes coin-flip {
+
+  0%,
+  100% {
+    animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+  }
+
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  50% {
+    transform: rotateY(1800deg);
+    animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+  }
+
+  100% {
+    transform: rotateY(3600deg);
+  }
+}
